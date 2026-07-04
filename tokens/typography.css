@@ -1,0 +1,34 @@
+/* Typography — Woodland Dark Academia
+   Ruritania = display/headers only (short strings, large sizes).
+   IM Fell English = all body & italic. IM Fell English SC = small-caps UI, nav, plaques.
+   UnifrakturMaguntia = drop caps ONLY. Special Elite = specimen tags, prices, footers. */
+:root {
+  --font-display: "Ruritania", serif;
+  --font-display-outline: "Ruritania Outline", serif;
+  --font-body: "IM Fell English", serif;
+  --font-smallcaps: "IM Fell English SC", serif;
+  --font-blackletter: "UnifrakturMaguntia", cursive;
+  --font-label: "Special Elite", cursive;
+
+  /* scale (desktop, 1180px content column) */
+  --text-hero: 98px;        /* Ruritania, hero wordmark */
+  --text-display: 64px;     /* Ruritania, page titles */
+  --text-h1: 42px;          /* Ruritania, section headings */
+  --text-h2: 40px;          /* Ruritania, dark-band headings */
+  --text-h3: 21px;          /* IM Fell SC, sub-headings */
+  --text-card-title: 18px;  /* IM Fell, card names */
+  --text-body: 15.5px;      /* IM Fell */
+  --text-italic-lead: 19px; /* IM Fell italic, hero sublines */
+  --text-note: 13.5px;      /* IM Fell italic captions */
+  --text-smallcaps: 13px;   /* IM Fell SC UI lines */
+  --text-tag: 10.5px;       /* Special Elite tags */
+  --drop-cap: 46px;         /* UnifrakturMaguntia */
+
+  --ls-caps-wide: 0.3em;    /* hero small-caps */
+  --ls-caps: 0.22em;        /* nav, footers */
+  --ls-plaque: 0.18em;
+  --ls-tag: 0.18em;
+
+  --lh-body: 1.62;
+  --lh-tight: 1.1;
+}

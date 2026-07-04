@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Rose Kilgore — Rare Coin Auctioneer &amp; Keeper of Collections</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      margin: 0;
+      background: #0c0e08
+    }
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7/babel.min.js"></script>
+  <script src="assets/ds-loader.js"></script>
+  <script src="assets/parallax.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    /* @jsxRuntime classic */ /* @jsx React.createElement */
+    const NS = window.WDA;
+    const FILES = ["components/core/Button.jsx", "components/core/SectionHeading.jsx", "components/core/NavRow.jsx", "components/core/WaxSeal.jsx", "components/core/DropCap.jsx", "components/core/GrainOverlay.jsx", "components/core/VaultTag.jsx", "components/core/DoubleRule.jsx", "components/art/Ledger.jsx", "components/art/SpecimenCard.jsx", "components/art/GoldFrame.jsx", "components/art/PlaqueLabel.jsx", "components/art/FloralSprig.jsx"];
+
+    /* public-domain plates, hotlinked from Wikimedia Commons */
+    const WM = (f, w) => "https://commons.wikimedia.org/wiki/Special:FilePath/" + f + "?width=" + w;
+    const ART = {
+      hero: WM("Van%20Gogh%20-%20Starry%20Night%20-%20Google%20Art%20Project.jpg", 1600),
+    };
+    const FLORAL = "assets/floral.png";
+    const HEADSHOT = "assets/headshot.jpeg";
+    const KQED = "https://www.kqed.org/arts/13936965/san-francisco-ghost-tours-true-crime-history-halloween";
+    const LINKEDIN = "https://www.linkedin.com/in/rose-kilgore-38a365219/";
+    const EMAIL = "mailto:krosekilgore@gmail.com";
+
+    /* ── content: Rose Kilgore ── */
+    const EDUCATION = [
+      { name: "B.A., Art History & Studio Art", price: "San Francisco State University" },
+      { name: "A.A., Art History", price: "Skyline College" },
+    ];
+
+    const EXPERIENCE = [
+      {
+        no: "Entry No. V", role: "Rare Coin Auctioneer", company: "Witter Coin", place: "San Francisco Bay Area", dates: "Jun 2026 — present", note: "full-time · on-site", current: true,
+        bullets: [
+          "Presents rare-coin auctions by livestream across modern digital platforms — pairing traditional auctioneering craft with interactive online entertainment for collectors of every experience level.",
+          "Bridges numismatic heritage and emerging livestream commerce, drawing out each coin’s historical, cultural, and artistic significance for a new generation of collectors worldwide.",
+        ],
+      },
+      {
+        no: "Entry No. IV", role: "Collections Assistant", company: "Historical Society of South San Francisco", place: "Hybrid", dates: "Sep 2025 — present", note: "part-time", current: true,
+        bullets: [
+          "Handles the intake and export of every collections item passing through the society — donations, transfers, and acquisitions alike.",
+          "Built and maintains the society’s eBay storefront for excess collection items — now one of the society’s biggest sources of revenue.",
+        ],
+      },
+      {
+        no: "Entry No. III", role: "Preview Worker", company: "Bonhams", place: "United States", dates: "May 2025 — present", note: "part-time · on-site", current: true,
+        bullets: [
+          "Safely and securely handles priceless artifacts and artworks for auction previews — among them high-value works by figures such as Bob Ross and Ellsworth Kelly — and sees each one properly stored away once the viewing closes.",
+        ],
+      },
+      {
+        no: "Entry No. II", role: "Ambassador Council Leader", company: "United Way Bay Area", place: "San Francisco Bay Area", dates: "Aug 2021 — present", note: "part-time", current: true,
+        bullets: [
+          "Leads UWBA’s ambassador council and helps stage events such as the SparkPoint job fairs.",
+          "Engages high-value donors and clients - Dodge & Cox and BMO among them - to secure funding for the organization’s work worth in the millions of dollars range.",
+        ],
+      },
+      {
+        no: "Entry No. I", role: "Historical Docent", company: "The Haunt", place: "San Francisco, CA", dates: "Feb 2023 — Jan 2026", note: "featured by kqed arts & culture",
+        bullets: [
+          "Led solo evening tours through historic North Beach on the city’s darker chapters - shanghaiing, the 1906 earthquake and fires - grounding every ghost story in careful research and historical context.",
+        ],
+      },
+    ];
+
+    const TOOLKIT = [
+      { label: "Auctioneering & Commerce", items: "livestream auctioneering · collector education · interactive online sales · e-commerce (the society’s eBay storefront) · donor & client relations — Dodge & Cox, BMO" },
+      { label: "Collections Care", items: "artifact & artwork handling · auction preview preparation · secure storage · collections intake & export · cataloguing donations & transfers" },
+      { label: "History & Scholarship", items: "numismatic heritage · art history (B.A., SFSU) · studio art · San Francisco’s darker history — 1906 earthquake & fires, shanghaiing · deep-dive historical research" },
+      { label: "Public Engagement", items: "solo walking tours · docent interpretation · live audiences & entertainment · event production (SparkPoint job fairs) · ambassador leadership · press — KQED Arts & Culture" },
+    ];
+
+    const Reveal = ({ delay = 0, children, style }) => (
+      <div data-reveal="true" style={{ opacity: 0, transform: "translateY(28px)", transition: "opacity .9s ease " + delay + "s, transform .9s cubic-bezier(.2,.8,.2,1) " + delay + "s", ...style }}>{children}</div>
+    );
+
+    function App() {
+      if (!NS || !NS.SpecimenCard) return <div style={{ fontFamily: "monospace", padding: 24, color: "#e8dfc4" }}>components not loaded</div>;
+      const { Button, SectionHeading, NavRow, WaxSeal, DropCap, GrainOverlay, VaultTag, DoubleRule, Ledger, SpecimenCard, GoldFrame, PlaqueLabel, FloralSprig } = NS;
+      const shellRef = React.useRef(null);
+      const keeperRef = React.useRef(null);
+      const recordRef = React.useRef(null);
+      const cabinetRef = React.useRef(null);
+      const contactRef = React.useRef(null);
+
+      React.useEffect(() => { if (window.WDAParallax) window.WDAParallax.init(); }, []);
+      const goTo = (ref) => { const shell = shellRef.current, el = ref.current; if (!shell || !el) return; const top = el.getBoundingClientRect().top - shell.getBoundingClientRect().top + shell.scrollTop; shell.scrollTo({ top, behavior: "smooth" }); };
+
+      return (
+        <div ref={shellRef} data-plx-scroll="true" style={{ height: "100vh", overflowY: "auto", overflowX: "hidden", position: "relative", background: "#0c0e08" }}>
+
+          {/* ── fixed navbar ── */}
+          <div style={{ position: "fixed", left: 0, right: 0, top: 0, zIndex: 50, display: "flex", justifyContent: "center", padding: "26px 0 36px", background: "linear-gradient(180deg, rgba(10,8,5,.9) 0%, rgba(10,8,5,.55) 55%, rgba(10,8,5,0) 100%)", animation: "fadeUp 1.2s ease-out both" }}>
+            <NavRow items={[
+              { label: "ABOUT ME", onClick: () => goTo(keeperRef) },
+              { label: "EXPERIENCES", onClick: () => goTo(recordRef) },
+              { label: "THE COLLECTIONS", onClick: () => goTo(cabinetRef) },
+              { label: "CONTACT", onClick: () => goTo(contactRef) },
+            ]} />
+          </div>
+
+          {/* ── pinned hero ── */}
+          <div data-screen-label="Hero" style={{ position: "sticky", top: 0, height: "100vh", overflow: "hidden", zIndex: 1 }}>
+            <div data-plx-y="0.22" style={{ position: "absolute", left: 0, top: "-8%", width: "100%", height: "120%", willChange: "transform" }}>
+              <img src={ART.hero} alt="The Starry Night — V. van Gogh, 1889" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "50% 38%", filter: "var(--filter-painting)" }} />
+            </div>
+            <div style={{ position: "absolute", inset: 0, background: "var(--gradient-hero-protect)" }}></div>
+            <div style={{ position: "absolute", inset: 0, background: "var(--gradient-hero-gold-wash)" }}></div>
+            <div style={{ position: "absolute", inset: 0, boxShadow: "var(--vignette-inset)", pointerEvents: "none" }}></div>
+            <GrainOverlay />
+            <div data-plx-y="-0.12" style={{ position: "absolute", inset: 0, zIndex: 6, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", textAlign: "center", paddingBottom: 40, willChange: "transform" }}>
+              <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 19, color: "var(--ivory-350)", whiteSpace: "nowrap", animation: "fadeUp 1.3s .2s ease-out both" }}>San Bruno, CA</div>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: "clamp(58px, 7.2vw, 100px)", lineHeight: 1.24, marginTop: 10, background: "var(--gradient-gold-text)", backgroundSize: "220% 100%", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent", WebkitTextFillColor: "transparent", animation: "shimmer 8s ease-in-out infinite", padding: "70px 28px 12px", marginTop: -24 }}>Rose Kilgore</div>
+              <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 20, color: "var(--ivory-400)", marginTop: 12, animation: "fadeUp 1.3s .45s ease-out both" }}>Rare coin auctioneer, collections assistant &amp; historian</div>
+              <div style={{ marginTop: 32, animation: "fadeUp 1.3s .6s ease-out both" }}>
+                <Button variant="gold" onClick={() => goTo(keeperRef)}>LEARN MORE ABOUT ME</Button>
+              </div>
+            </div>
+            <div data-plx-y="-0.5" style={{ position: "absolute", left: -70, bottom: -100, zIndex: 4, width: "min(440px, 34vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src={FLORAL} treatment="natural" width="100%" rotate={-14} sway="a" swayOrigin="20% 95%" />
+            </div>
+            <div data-plx-y="-0.72" style={{ position: "absolute", right: -130, bottom: -160, zIndex: 5, width: "min(500px, 36vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src={FLORAL} treatment="silhouette" width="100%" rotate={-10} flip sway="b" swayOrigin="85% 95%" opacity={0.8} />
+            </div>
+            <div data-plx-y="-0.22" style={{ position: "absolute", right: 30, top: -90, zIndex: 4, width: "min(220px, 15vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src={FLORAL} treatment="sepia" width="100%" rotate={165} sway="a" swayOrigin="50% 5%" opacity={0.75} />
+            </div>
+            <div data-plx-y="-0.3" style={{ position: "absolute", left: -50, top: -90, zIndex: 4, width: "min(300px, 20vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src="assets/floral-waterlily.png" treatment="sepia" width="100%" rotate={150} sway="b" swayOrigin="50% 5%" opacity={0.7} />
+            </div>
+            <div data-plx-y="-0.42" style={{ position: "absolute", left: -40, top: "38%", zIndex: 4, width: "min(150px, 10vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src="assets/floral-vintage2.png" treatment="natural" width="100%" rotate={14} sway="a" swayOrigin="10% 95%" opacity={0.5} />
+            </div>
+            <div data-plx-y="-0.34" style={{ position: "absolute", right: -70, top: "30%", zIndex: 4, width: "min(220px, 15vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src="assets/floral-vintage2.png" treatment="sepia" width="100%" rotate={-24} flip sway="b" swayOrigin="90% 90%" opacity={0.55} />
+            </div>
+            <div data-plx-y="-0.6" style={{ position: "absolute", left: "2%", bottom: -220, zIndex: 4, width: "min(520px, 36vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src="assets/floral-waterlily.png" treatment="silhouette" width="100%" rotate={8} sway="a" swayOrigin="50% 95%" opacity={0.7} />
+            </div>
+            <div data-plx-y="-0.82" style={{ position: "absolute", right: "6%", bottom: -190, zIndex: 5, width: "min(300px, 21vw)", willChange: "transform", pointerEvents: "none" }}>
+              <FloralSprig src={FLORAL} treatment="silhouette" width="100%" rotate={20} sway="b" swayOrigin="50% 95%" opacity={0.8} />
+            </div>
+            <div style={{ position: "absolute", left: 0, right: 0, bottom: 22, zIndex: 5, textAlign: "center", fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 15, color: "var(--ivory-350)", animation: "breathe 2.8s ease-in-out infinite" }}>scroll &nbsp;↓</div>
+          </div>
+
+          {/* ── parchment: ABOUT ME ── */}
+          <div ref={keeperRef} data-screen-label="ABOUT ME" style={{ position: "relative", zIndex: 2, background: "var(--gradient-parchment)", color: "var(--ink-900)", padding: "var(--pad-sheet-y) var(--pad-sheet-x)", boxShadow: "var(--shadow-sheet)" }}>
+            <GrainOverlay parchment />
+            <Reveal style={{ position: "relative" }}>
+              <SectionHeading title="About Me" />
+            </Reveal>
+            <div style={{ position: "relative", display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 54, marginTop: 38, maxWidth: 1040, marginLeft: "auto", marginRight: "auto" }}>
+              <Reveal delay={0.15}>
+                <DropCap letter="A">uctioneer and art historian in the San Francisco Peninsula - trained in art history and studio art, and raised on the past itself: a second-generation dark history lover who first went looking for history on Civil War battlefields with her father. I have handled priceless works at Bonhams, keep the collections of the Historical Society of South San Francisco - where the eBay storefront I built has become one of its biggest sources of revenue - and now at Witter Coin, presenting rare coins by livestream to a new generation of collectors.</DropCap>
+                <div style={{ fontFamily: "var(--font-smallcaps)", fontSize: 13, letterSpacing: "var(--ls-tag)", color: "var(--ink-500)", marginTop: 30, marginBottom: 6 }}>SCHOOLING</div>
+                <Ledger items={EDUCATION} />
+                <div style={{ display: "flex", alignItems: "center", gap: 18, marginTop: 30 }}>
+                  <WaxSeal initials="RK" />
+                  <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 14, color: "var(--ink-500)" }}>Always striving to leave history behind a little better than I found it.</div>
+                </div>
+              </Reveal>
+              <Reveal delay={0.3} style={{ position: "relative" }}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+                  <div style={{ border: "1px solid var(--ink-400)", outline: "1px solid rgba(107,84,58,.5)", outlineOffset: 5, padding: 13, background: "rgba(255,252,240,.45)", width: 250 }}>
+                    <img src={HEADSHOT} alt="Portrait of Rose Kilgore" style={{ display: "block", width: "100%", mixBlendMode: "multiply", filter: "grayscale(.2) sepia(.4) contrast(1.04) brightness(1.02)" }} />
+                  </div>
+                  <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 13.5, color: "var(--ink-500)", textAlign: "center", marginTop: 12 }}>Rose Kilgore, San Francisco, 2026</div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10, marginTop: 16, border: "1px solid var(--ink-400)", outline: "1px solid rgba(107,84,58,.5)", outlineOffset: 4, padding: "8px 16px", background: "rgba(255,252,240,.45)" }}>
+                    <span style={{ fontFamily: "var(--font-smallcaps)", fontSize: 12.5, letterSpacing: "var(--ls-tag)", color: "var(--ink-500)" }}>❦ &nbsp;FEATURED BY KQED ARTS & CULTURE&nbsp; ❦</span>
+                  </div>
+                </div>
+                <div style={{ position: "absolute", right: -100, bottom: -60, pointerEvents: "none" }}>
+                  <FloralSprig src={FLORAL} treatment="pressed" width={170} rotate={24} sway={false} />
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* ── gallery wall: the record of service ── */}
+          <div ref={recordRef} data-screen-label="The Record (experience)" style={{ position: "relative", zIndex: 2, background: "var(--gradient-wall-green)", overflow: "hidden", padding: "50px var(--pad-page-x) 56px" }}>
+            <GrainOverlay />
+            <Reveal style={{ position: "relative", textAlign: "center" }}>
+              <SectionHeading title="The Record of Service" tone="ivory" size={40} />
+              <div style={{ fontFamily: "var(--font-label)", fontSize: 10.5, letterSpacing: "var(--ls-tag)", color: "var(--khaki-600)", marginTop: 10 }}>PRODESSIONAL EXPERIENCES</div>
+            </Reveal>
+            <div style={{ position: "relative", maxWidth: 980, margin: "34px auto 0" }}>
+              {EXPERIENCE.map((e, i) => (
+                <Reveal key={e.no} delay={0.05 + i * 0.08}>
+                  <div style={{ display: "grid", gridTemplateColumns: "168px 1fr", gap: 30, padding: "26px 4px", borderTop: "1px solid var(--border-gold-faint)" }}>
+                    <div>
+                      <div style={{ fontFamily: "var(--font-label)", fontSize: 10.5, color: "var(--khaki-600)" }}>{e.no}</div>
+                      <div style={{ fontFamily: "var(--font-label)", fontSize: 11.5, color: "var(--ivory-350)", marginTop: 6, lineHeight: 1.7 }}>{e.dates}</div>
+                      {e.current ? <VaultTag style={{ marginTop: 10 }}>CURRENT ROLE</VaultTag> : null}
+                    </div>
+                    <div>
+                      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 16, flexWrap: "wrap" }}>
+                        <div style={{ fontFamily: "var(--font-smallcaps)", fontSize: 19, letterSpacing: ".08em", color: "var(--ivory-200)" }}>{e.role}</div>
+                        <div style={{ fontFamily: "var(--font-label)", fontSize: 10, letterSpacing: ".08em", color: "var(--khaki-600)" }}>{e.note}</div>
+                      </div>
+                      <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 15, color: "var(--gold-500)", marginTop: 3 }}>{e.company}{e.place ? " — " + e.place : ""}</div>
+                      <div style={{ marginTop: 10, display: "flex", flexDirection: "column", gap: 8 }}>
+                        {e.bullets.map((b, j) => (
+                          <div key={j} style={{ display: "grid", gridTemplateColumns: "14px 1fr", gap: 8, fontFamily: "var(--font-body)", fontSize: 14.5, lineHeight: 1.62, color: "var(--ivory-400)" }}>
+                            <span style={{ color: "var(--khaki-600)" }}>❧</span>
+                            <span>{b}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+              <DoubleRule tone="gold" style={{ marginTop: 4 }} />
+              <Reveal delay={0.1}>
+                <div style={{ textAlign: "center", marginTop: 22 }}>
+                  <Button variant="gold-outlined" size="sm" href={LINKEDIN} style={{ whiteSpace: "nowrap" }}>THE WHOLE JOURNEY, AT LINKEDIN</Button>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+
+          {/* ── cabinet: the collections ── */}
+          <div ref={cabinetRef} data-screen-label="The Collections (work)" style={{ position: "relative", zIndex: 2, background: "var(--gradient-wood)", overflow: "hidden" }}>
+            <GrainOverlay />
+            <Reveal style={{ position: "relative", textAlign: "center", padding: "44px 0 6px" }}>
+              <div style={{ fontFamily: "var(--font-display)", fontSize: 40, color: "var(--ivory-200)" }}>From the Collections</div>
+            </Reveal>
+
+            {/* featured: two framed posts */}
+            <div style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 44, maxWidth: 1080, margin: "36px auto 0", padding: "0 var(--pad-page-x)" }}>
+              <Reveal delay={0.1}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                  <GoldFrame style={{ display: "block", width: "100%", maxWidth: 484, boxSizing: "border-box" }}>
+                    <img src="assets/witter-logo-black-header.png" alt="Witter Coin" style={{ display: "block", width: "100%", aspectRatio: "4/3", objectFit: "contain", background: "#ffffff", padding: "14% 12%", boxSizing: "border-box", filter: "sepia(.18) saturate(.9) brightness(.98)" }} />
+                  </GoldFrame>
+                  <PlaqueLabel style={{ marginTop: 18 }}>LIVESTREAM RARE-COIN AUCTIONS, WITTER COIN</PlaqueLabel>
+                  <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 14.5, color: "var(--ivory-400)", maxWidth: 430, marginTop: 12, lineHeight: 1.6 }}>Traditional auctioneering carried live onto modern platforms.</div>
+                  <div style={{ fontFamily: "var(--font-label)", fontSize: 10, letterSpacing: ".08em", color: "var(--khaki-600)", marginTop: 10 }}>witter coin · san francisco · sales weekly by livestream</div>
+                  <div style={{ display: "flex", gap: 12, marginTop: 16, flexWrap: "wrap", justifyContent: "center" }}>
+                    <Button variant="gold-outlined" size="sm" href="https://wittercoin.com/sell-to-us" style={{ whiteSpace: "nowrap" }}>CONSIGN YOUR COINS</Button>
+                  </div>
+                </div>
+              </Reveal>
+              <Reveal delay={0.22}>
+                <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+                  <GoldFrame style={{ display: "block", width: "100%", maxWidth: 484, boxSizing: "border-box" }}>
+                    <img src="assets/historic society.webp" alt="Seal of the Historical Society of South San Francisco" style={{ display: "block", width: "100%", aspectRatio: "4/3", objectFit: "contain", background: "#ffffff", filter: "sepia(.18) saturate(.9) brightness(.98)" }} />
+                  </GoldFrame>
+                  <PlaqueLabel style={{ marginTop: 18 }}>THE SOCIETY&rsquo;S STOREFRONT — HISTORICAL SOCIETY OF SOUTH S.F.</PlaqueLabel>
+                  <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 14.5, color: "var(--ivory-400)", maxWidth: 430, marginTop: 12, lineHeight: 1.6 }}>Excess collection items - donated, transferred, or acquired - catalogued and offered to the public; the storefront now stands among the society&rsquo;s biggest sources of revenue.</div>
+                  <div style={{ fontFamily: "var(--font-label)", fontSize: 10, letterSpacing: ".08em", color: "var(--khaki-600)", marginTop: 10 }}>intake &amp; export · cataloguing · collections management</div>
+                  <div style={{ display: "flex", gap: 12, marginTop: 16, flexWrap: "wrap", justifyContent: "center" }}>
+                    <Button variant="gold-outlined" size="sm" href="https://www.ebay.com/usr/ssfhistoricalsociety" style={{ whiteSpace: "nowrap" }}>BROWSE THE STOREFRONT</Button>
+                  </div>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* the press: kqed feature */}
+            <Reveal delay={0.1}>
+              <div style={{ position: "relative", maxWidth: 980, margin: "52px auto 0", padding: "0 var(--pad-page-x)" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "230px 1fr auto", gap: 28, alignItems: "center", border: "1px solid var(--border-gold-faint)", outline: "1px solid rgba(201,169,97,.3)", outlineOffset: 5, padding: 20, background: "rgba(10,8,5,.5)" }}>
+                  <div style={{ overflow: "hidden", border: "1px solid rgba(201,169,97,.35)" }}>
+                    <img src="assets/The-Haunt-ghost-tour-Estefany-Gonzalez-023-qut.jpg" alt="Rose Kilgore leading a Haunt ghost tour in San Francisco — photograph by Estefany Gonzalez" style={{ display: "block", width: "100%", filter: "sepia(.22) saturate(.85) brightness(.98)" }} />
+                  </div>
+                  <div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <img src="assets/kqed.png" alt="KQED" style={{ display: "block", height: 15, filter: "brightness(0) invert(1) sepia(.45) brightness(.9)", opacity: 0.95 }} />
+                      <div style={{ fontFamily: "var(--font-label)", fontSize: 10.5, letterSpacing: "var(--ls-tag)", color: "var(--gold-500)" }}>FEATURED ARTICLE</div>
+                    </div>
+                    <div style={{ fontFamily: "var(--font-display)", fontSize: 34, color: "var(--ivory-200)", marginTop: 10, padding: "10px 0px", lineHeight: 1.6 }}>Haunted by Horror Stereotypes</div>
+                    <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 15, color: "var(--ivory-400)", marginTop: 6, lineHeight: 1.6 }}>KQED&rsquo;s profile of San Francisco&rsquo;s evolving ghost tours opens with Rose — a second-generation ghost hunter whose Haunt tours traded cheap thrills for careful research, grounding each haunting in the lives of the people behind it.</div>
+                    <div style={{ fontFamily: "var(--font-label)", fontSize: 10, letterSpacing: ".08em", color: "var(--khaki-600)", marginTop: 8 }}>kqed arts & culture · october · photograph: estefany gonzalez</div>
+                  </div>
+                  <Button variant="gold-outlined" size="sm" href={KQED} style={{ whiteSpace: "nowrap" }}>READ THE ARTICLE</Button>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* the vault: odyssa */}
+            <Reveal delay={0.18}>
+              <div style={{ position: "relative", maxWidth: 980, margin: "20px auto 0", padding: "0 var(--pad-page-x)" }}>
+                <div style={{ display: "grid", gridTemplateColumns: "230px 1fr auto", gap: 28, alignItems: "center", border: "1px solid var(--border-gold-faint)", outline: "1px solid rgba(94,36,49,.55)", outlineOffset: 5, padding: 20, background: "rgba(10,8,5,.5)" }}>
+                  <div style={{ overflow: "hidden", border: "1px solid rgba(201,169,97,.35)" }}>
+                    <img src="assets/odyssa.webp" alt="Odyssa — sealed catacombs teaser" style={{ display: "block", width: "100%", filter: "brightness(1.6) contrast(1.05) saturate(.85)" }} />
+                  </div>
+                  <div>
+                    <VaultTag>IN DEVELOPMENT</VaultTag>
+                    <div style={{ fontFamily: "var(--font-display)", fontSize: 34, color: "var(--ivory-200)", marginTop: 10, padding: "10px 0px" }}>Odyssa</div>
+                    <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 15, color: "var(--ivory-400)", marginTop: 6, lineHeight: 1.6 }}>A 1-bit pixel-horror descent into the sealed catacombs beneath a city that has known too much war.</div>
+                    <div style={{ fontFamily: "var(--font-label)", fontSize: 10, letterSpacing: ".08em", color: "var(--khaki-600)", marginTop: 8 }}>godot · upcoming release: 2027</div>
+                  </div>
+                  <Button variant="oxblood" size="sm" href="https://odyssa-catacombs.com" style={{ whiteSpace: "nowrap" }}>VIEW THE TEASER</Button>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* ── parchment: the toolkit ── */}
+            <div data-screen-label="The Toolkit (skills)" style={{ position: "relative", zIndex: 2, background: "var(--gradient-parchment)", color: "var(--ink-900)", padding: "var(--pad-sheet-y) var(--pad-sheet-x)", boxShadow: "var(--shadow-sheet)", marginTop: 56 }}>
+              <GrainOverlay parchment />
+              <Reveal style={{ position: "relative" }}>
+                <SectionHeading title="Skills" />
+              </Reveal>
+              <div style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "34px 54px", marginTop: 36, maxWidth: 900, marginLeft: "auto", marginRight: "auto" }}>
+                {TOOLKIT.map((g, i) => (
+                  <Reveal key={g.label} delay={0.05 + i * 0.07}>
+                    <div style={{ fontFamily: "var(--font-smallcaps)", fontSize: 15, letterSpacing: "var(--ls-tag)", color: "var(--ink-800)" }}>{g.label}</div>
+                    <div style={{ borderTop: "1px dotted var(--leader-dots)", marginTop: 8, paddingTop: 10, fontFamily: "var(--font-label)", fontSize: 11, lineHeight: 2, color: "var(--ink-500)" }}>{g.items}</div>
+                  </Reveal>
+                ))}
+              </div>
+              <div style={{ position: "absolute", right: -70, top: -60, pointerEvents: "none" }}>
+                <FloralSprig src={FLORAL} treatment="pressed" width={200} rotate={155} sway={false} opacity={0.9} />
+              </div>
+            </div>
+
+            {/* ── correspondence + colophon ── */}
+            <div ref={contactRef} data-screen-label="Correspondence (contact)" style={{ position: "relative", textAlign: "center", padding: "54px var(--pad-page-x) 0" }}>
+              <Reveal>
+                <SectionHeading title="Correspondence" tone="ivory" size={40} />
+                <div style={{ fontFamily: "var(--font-body)", fontStyle: "italic", fontSize: 17, color: "var(--ivory-400)", marginTop: 14, maxWidth: 520, marginLeft: "auto", marginRight: "auto", lineHeight: 1.6 }}>For consignments, collections enquiries, or potential opportunities.</div>
+                <div style={{ marginTop: 22, display: "flex", justifyContent: "center" }}>
+                  <NavRow items={[
+                    { label: "EMAIL", href: "mailto:krosekilgore@gmail.com" },
+                    { label: "TELEPHONE", href: "tel:+16503988992" },
+                    { label: "LINKEDIN", href: LINKEDIN },
+                  ]} />
+                </div>
+                <div style={{ fontFamily: "var(--font-label)", fontSize: 10.5, letterSpacing: ".08em", color: "var(--khaki-600)", marginTop: 14 }}>krosekilgore@gmail.com · (650) 398-8992</div>
+                <div style={{ marginTop: 26, display: "flex", justifyContent: "center", alignItems: "center", gap: 18 }}>
+                  <WaxSeal initials="RK" size={54} />
+                  <Button variant="gold" href="mailto:krosekilgore@gmail.com">SEND WORD</Button>
+                </div>
+              </Reveal>
+              <div style={{ position: "relative", marginTop: 44, borderTop: "1px solid var(--border-gold-faint)", padding: "18px 0 22px", display: "flex", justifyContent: "space-between", fontFamily: "var(--font-label)", fontSize: 11, color: "var(--text-footer-dark)" }}>
+                <span>correspondence answered within the week</span>
+                <span style={{ fontFamily: "var(--font-smallcaps)", letterSpacing: "var(--ls-caps)" }}>❦ &nbsp;ROSE KILGORE&nbsp; ❦</span>
+                <span>san bruno, california</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    WDALoad("./", FILES).then(function () {
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    }).catch(function (e) {
+      document.getElementById("root").innerHTML = "<div style='font-family:monospace;padding:20px;color:#e8dfc4'>failed to load components: " + e.message + "</div>";
+    });
+  </script>
+</body>
+
+</html>

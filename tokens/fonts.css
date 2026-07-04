@@ -1,0 +1,21 @@
+/* Webfonts — Woodland Dark Academia */
+/* Google-hosted faces */
+@import url("https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&family=Special+Elite&family=UnifrakturMaguntia&display=swap");
+
+/* Ruritania — user-supplied display face (headers, wordmarks). */
+@font-face {
+  font-family: "Ruritania";
+  src: url("../assets/fonts/Ruritania.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Ruritania Outline — ghost initials / watermarks only. */
+@font-face {
+  font-family: "Ruritania Outline";
+  src: url("../assets/fonts/Ruritania-Outline.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

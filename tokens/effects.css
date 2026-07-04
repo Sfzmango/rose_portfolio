@@ -1,0 +1,58 @@
+/* Effects — gradients, shadows, texture, motion — Woodland Dark Academia */
+:root {
+  /* gilt frame recipe (outer bevel) */
+  --gradient-gold-frame: linear-gradient(135deg, #6b5226 0%, #c9a961 28%, #f0e0ae 50%, #b28f4d 72%, #5e4720 100%);
+  /* inner fillet strip inside a frame */
+  --gradient-gold-fillet: linear-gradient(135deg, #a8873f, #e5cf96);
+  /* shimmering gold display text (use with background-clip:text + shimmer anim) */
+  --gradient-gold-text: linear-gradient(100deg, #9c7c42 0%, #e6cf93 30%, #f7ecc4 50%, #cfa95e 70%, #8a6a36 100%);
+  --gradient-plaque-border: linear-gradient(135deg, #8a6d3b, #c9a961, #8a6d3b);
+  --gradient-plaque: linear-gradient(180deg, #2a2318, #1c1710);
+  --gradient-parchment: linear-gradient(160deg, #e9dec2 0%, #ddcfaa 55%, #d3c39c 100%);
+  --gradient-card: linear-gradient(165deg, #eae0c6, #dcd0ae);
+  --gradient-wood: radial-gradient(ellipse at 50% 0%, #261b10 0%, #1a1108 52%, #120c06 100%);
+  --gradient-wall-green: radial-gradient(ellipse at 50% 26%, #1d2d22 0%, #131f17 48%, #0a110c 100%);
+  --gradient-seal: radial-gradient(circle at 38% 32%, #7a2a3a, #4a1620 70%);
+  --gradient-picture-light: radial-gradient(ellipse at 50% 0%, rgba(255, 203, 110, 0.22), rgba(255, 180, 80, 0.06) 55%, transparent 75%);
+  --gradient-hero-protect: linear-gradient(180deg, rgba(16, 20, 10, 0.6) 0%, rgba(10, 12, 6, 0.16) 42%, rgba(8, 10, 5, 0.86) 92%);
+  --gradient-hero-gold-wash: radial-gradient(ellipse at 50% 44%, rgba(212, 178, 106, 0.15), transparent 58%);
+
+  /* imagery grade for full-bleed paintings */
+  --filter-painting: sepia(0.35) saturate(0.72) brightness(0.82) contrast(1.06);
+
+  --shadow-card: 0 14px 28px rgba(0, 0, 0, 0.55);
+  --shadow-card-hover: 0 26px 44px rgba(0, 0, 0, 0.65);
+  --shadow-card-light: 0 10px 22px rgba(60, 40, 15, 0.28);
+  --shadow-frame: 0 26px 54px rgba(0, 0, 0, 0.65);
+  --shadow-label: 0 6px 14px rgba(0, 0, 0, 0.4);
+  --shadow-sheet: 0 -34px 70px rgba(0, 0, 0, 0.6); /* parchment sliding over hero */
+  --vignette-inset: inset 0 0 140px 30px rgba(0, 0, 0, 0.72);
+  --vignette-parchment: inset 0 0 90px rgba(120, 90, 40, 0.28);
+
+  /* film grain tile — layer at opacity .055 on dark, .07–.08 on parchment */
+  --texture-grain: url('data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20width=%27200%27%20height=%27200%27%3E%3Cfilter%20id=%27n%27%3E%3CfeTurbulence%20type=%27fractalNoise%27%20baseFrequency=%270.9%27%20numOctaves=%272%27%20stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect%20width=%27200%27%20height=%27200%27%20filter=%27url(%23n)%27/%3E%3C/svg%3E');
+
+  --ease-lift: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --duration-hover: 0.55s;
+  --duration-reveal: 0.9s;
+}
+
+/* grain overlay utility — place inside any position:relative section */
+.wda-grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: var(--texture-grain);
+}
+.wda-grain--parchment { opacity: 0.08; }
+
+@keyframes flicker { 0%, 100% { opacity: 1; } 18% { opacity: 0.82; } 25% { opacity: 0.95; } 44% { opacity: 0.78; } 58% { opacity: 0.93; } 71% { opacity: 0.85; } 84% { opacity: 0.97; } }
+@keyframes candle { 0%, 100% { opacity: 1; transform: scale(1); } 23% { opacity: 0.8; transform: scale(0.97); } 41% { opacity: 0.94; transform: scale(1.03); } 67% { opacity: 0.75; transform: scale(0.98); } 82% { opacity: 0.9; transform: scale(1.02); } }
+@keyframes sway { 0%, 100% { transform: rotate(-2.1deg); } 50% { transform: rotate(2.3deg); } }
+@keyframes swayB { 0%, 100% { transform: rotate(1.8deg); } 50% { transform: rotate(-2.4deg); } }
+@keyframes drift { 0%, 100% { transform: scale(1) translateY(0); } 50% { transform: scale(1.055) translateY(-10px); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes trackIn { from { opacity: 0; letter-spacing: 0.42em; } to { opacity: 1; } }
+@keyframes shimmer { 0% { background-position: -160% 50%; } 55%, 100% { background-position: 220% 50%; } }
+@keyframes breathe { 0%, 100% { opacity: 0.45; } 50% { opacity: 0.8; } }

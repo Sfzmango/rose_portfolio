@@ -1,0 +1,97 @@
+/* Colors — Woodland Dark Academia
+   Greens (forest walls) · Browns (wood counters) · Parchment & ink · Gold (gilt) · Oxblood (seals, rarity) */
+:root {
+  /* ---- base: greens ---- */
+  --green-950: #0a110c;
+  --green-900: #0e1512;
+  --green-850: #131f17;
+  --green-700: #1d2d22;
+  --green-600: #24382b;
+  --green-400: #4a6248;
+  --moss-300: #7a8c5f;
+
+  /* ---- base: browns ---- */
+  --brown-950: #120c06;
+  --brown-900: #1a1108;
+  --brown-800: #261b10;
+  --brown-700: #3a2d1f;
+  --brown-500: #5c4632;
+  --umber-400: #8a6a48;
+
+  /* ---- base: parchment ---- */
+  --parchment-50: #f4eedd;
+  --parchment-100: #f2ead2;
+  --parchment-200: #e9dec2;
+  --parchment-300: #ddcfaa;
+  --parchment-400: #d3c39c;
+  --card-hi: #eae0c6;
+  --card-lo: #dcd0ae;
+
+  /* ---- base: ink (on parchment) ---- */
+  --ink-900: #2e2418;
+  --ink-800: #33281a;
+  --ink-700: #41321f;
+  --ink-heading: #3a2a16;
+  --ink-500: #5a4630;
+  --ink-400: #6b543a;
+  --ink-300: #7a6244;
+  --ink-200: #8a704c;
+
+  /* ---- base: gold / brass ---- */
+  --gold-deep: #5e4720;
+  --gold-700: #6b5226;
+  --gold-600: #8a6d3b;
+  --gold-olive: #9c7c42;
+  --brass-400: #a8873f;
+  --gold-500: #c9a961;
+  --gold-350: #cfa95e;
+  --gold-300: #e6cf93;
+  --brass-200: #e5cf96;
+  --gold-200: #f0e0ae;
+  --gold-100: #f7ecc4;
+
+  /* ---- base: ivory & khaki (light text on dark) ---- */
+  --ivory-100: #e8dfc4;
+  --ivory-200: #e8dcbe;
+  --ivory-300: #d9c690;
+  --ivory-350: #d6c896;
+  --ivory-400: #cfc4a0;
+  --khaki-500: #b09a6f;
+  --khaki-600: #a78e5f;
+  --khaki-700: #9c8a68;
+
+  /* ---- base: oxblood (use sparingly: seals, "last one", the vault) ---- */
+  --oxblood-700: #4a1620;
+  --oxblood-600: #5e2431;
+  --oxblood-500: #6b2a35;
+  --oxblood-400: #7a2a3a;
+  --rust-500: #6b2a1f;
+
+  /* ---- semantic ---- */
+  --surface-night: var(--brown-950);        /* darkest page bg */
+  --surface-wood: var(--brown-800);          /* counter / cabinet bands */
+  --surface-wall: var(--green-850);          /* gallery wall bands */
+  --surface-parchment: var(--parchment-200); /* light content sheets */
+  --surface-card: var(--card-hi);            /* specimen cards */
+  --surface-plaque: #1c1710;                 /* engraved plaques */
+
+  --text-ink: var(--ink-800);                /* body on parchment */
+  --text-ink-soft: var(--ink-500);           /* captions on parchment */
+  --text-heading-ink: var(--ink-heading);    /* Ruritania headings on parchment */
+  --text-ivory: var(--ivory-100);            /* body on dark */
+  --text-ivory-soft: var(--ivory-400);       /* sublines on dark */
+  --text-gold: var(--gold-500);
+  --text-label: var(--ink-300);              /* typewriter tags on cards */
+  --text-footer-dark: var(--khaki-700);      /* typewriter footer on dark */
+
+  --accent-gold: var(--gold-500);
+  --accent-oxblood: var(--oxblood-600);
+  --accent-rust: var(--rust-500);            /* blackletter drop caps */
+
+  --border-ink: var(--ink-400);              /* 1px frames on parchment */
+  --border-gold: rgba(201, 169, 97, 0.55);
+  --border-gold-faint: rgba(201, 169, 97, 0.28);
+  --divider-ink: rgba(90, 70, 48, 0.55);
+  --divider-ink-faint: rgba(90, 70, 48, 0.4);
+  --leader-dots: #8a704c;                    /* dotted price leaders */
+}

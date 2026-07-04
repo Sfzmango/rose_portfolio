@@ -1,0 +1,30 @@
+/* Spacing, borders, radii — Woodland Dark Academia
+   Corners are SQUARE everywhere except specimen ovals and wax seals. */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 34px;
+  --space-7: 44px;
+  --space-8: 58px;
+  --space-9: 70px;
+
+  --pad-page-x: 52px;        /* dark bands */
+  --pad-sheet-x: 70px;       /* parchment sheets */
+  --pad-sheet-y: 58px;
+  --pad-card: 15px;
+  --gap-cards: 24px;
+
+  --content-width: 1180px;
+  --hero-height: 780px;
+
+  --radius-0: 0;             /* default: square */
+  --radius-oval: 50%;        /* specimen portholes, seals */
+
+  /* the double-border recipe: 1px line + offset outline */
+  --rule-offset: 5px;        /* outline-offset for framed blocks */
+  --border-frame-w: 1px;
+  --border-specimen: 3px;    /* double border on ovals */
+}
